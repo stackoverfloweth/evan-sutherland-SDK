@@ -44,6 +44,20 @@ export class BaseApi<T extends BaseApiConfig | AuthenticatedApiConfig = BaseApiC
     }
   }
 
+  protected applyRequestParams(this: InternalAxiosRequestConfig): void {
+    if (!this.params) {
+      return
+    }
+
+    const { pagination, sorting, ...restOfParams } = this.params
+
+    this.params = {
+      ...restOfParams,
+      ...pagination,
+      ...sorting,
+    }
+  }
+
   protected composeBaseUrl(): string {
     const repeatingSlashes = /(\/+)/g
 
@@ -73,6 +87,7 @@ export class BaseApi<T extends BaseApiConfig | AuthenticatedApiConfig = BaseApiC
 
   protected composeRequestTransformers(): AxiosRequestTransformer[] {
     return [
+      this.applyRequestParams,
       ...asArray(this.apiConfig.transformRequest ?? []),
       ...asArray(axios.defaults.transformRequest ?? []),
     ]

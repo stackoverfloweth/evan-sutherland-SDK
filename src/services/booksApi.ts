@@ -1,5 +1,6 @@
 import { BaseApi, BaseApiConfig } from '@/services'
-import { Book, PaginatedRequest, PaginatedResponse } from '@/types'
+import { Book, PaginatedResponse } from '@/types'
+import { RequestParams } from '@/types/requestParams'
 
 
 export class BooksApi extends BaseApi {
@@ -7,8 +8,8 @@ export class BooksApi extends BaseApi {
     super(apiConfig, 'book')
   }
 
-  public getBooks(pageRequest: PaginatedRequest = {}): Promise<PaginatedResponse<Book[]>> {
-    return this.instance.get('', { params: pageRequest })
+  public getBooks(requestParams: RequestParams<Book> = {}): Promise<PaginatedResponse<Book[]>> {
+    return this.instance.get('', { params: requestParams })
   }
 
   public getBook(id: string): Promise<Book | undefined> {
