@@ -1,0 +1,20 @@
+{
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "project": "./tsconfig.json"
+    },
+    "extends": [
+      "@prefecthq"
+    ],
+    "settings": {
+      "import/resolver": {
+        "typescript": {
+          "project": "./tsconfig.json"
+        }
+      }
+    }
+  }
