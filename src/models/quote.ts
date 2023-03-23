@@ -1,20 +1,20 @@
 export interface IQuote {
   id: string,
-  character: string,
+  characterId: string,
   dialog: string,
-  movie: string,
+  movieId: string,
 }
 
 export class Quote implements IQuote {
   public readonly id: string
-  public character: string
+  public characterId: string
+  public movieId: string
   public dialog: string
-  public movie: string
 
   public constructor(quote: IQuote) {
     this.id = quote.id
-    this.character = quote.character
+    this.characterId = quote.characterId
+    this.movieId = quote.movieId
     this.dialog = quote.dialog
-    this.movie = quote.movie
   }
 }
