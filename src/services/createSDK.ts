@@ -16,9 +16,9 @@ export type CreateAuthenticatedApi = CreateBaseApi & {
   quotes: QuotesApi,
 }
 
-export function createApi(options: BaseApiConfig): CreateBaseApi
-export function createApi(options: AuthenticatedApiConfig): CreateAuthenticatedApi
-export function createApi(options: BaseApiConfig | AuthenticatedApiConfig = {}): CreateAuthenticatedApi | CreateBaseApi {
+export function createSDK(options?: BaseApiConfig): CreateBaseApi
+export function createSDK(options: AuthenticatedApiConfig): CreateAuthenticatedApi
+export function createSDK(options: BaseApiConfig | AuthenticatedApiConfig = {}): CreateAuthenticatedApi | CreateBaseApi {
   if (isAuthenticatedApiConfig(options)) {
     return {
       books: new BooksApi(),

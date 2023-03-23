@@ -2,6 +2,7 @@ import { BaseApi } from '@/services/baseApi'
 import { AuthenticatedApiConfig } from '@/types/authenticatedApiConfig'
 import { CharacterResponse } from '@/types/characterResponse'
 import { PaginatedResponse } from '@/types/pagination'
+import { QuoteResponse } from '@/types/quoteResponse'
 import { RequestParams } from '@/types/requestParams'
 
 export class CharactersApi extends BaseApi<AuthenticatedApiConfig> {
@@ -23,7 +24,7 @@ export class CharactersApi extends BaseApi<AuthenticatedApiConfig> {
       })
   }
 
-  public getCharacterQuotes(id: string, requestParams: RequestParams<CharacterResponse> = {}): Promise<PaginatedResponse<string[]>> {
+  public getCharacterQuotes(id: string, requestParams: RequestParams<QuoteResponse> = {}): Promise<PaginatedResponse<QuoteResponse[]>> {
     return this.instance.get(`${id}/quote`, { params: requestParams })
   }
 }
