@@ -99,5 +99,5 @@ export class BaseApi<T extends BaseApiConfig | AuthenticatedApiConfig = BaseApiC
 }
 
 function isAuthenticatedApiConfig(config: BaseApiConfig | AuthenticatedApiConfig): config is AuthenticatedApiConfig {
-  return !!config.baseURL
+  return 'apiKey' in config
 }
