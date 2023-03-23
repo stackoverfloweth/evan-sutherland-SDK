@@ -4,4 +4,14 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
+    "cSpell.words": [
+        "Ainur",
+        "Balrog",
+        "Balrogs",
+        "elven",
+        "Ents",
+        "Maiar",
+        "Uruk",
+        "Urulóki"
+    ],
 }

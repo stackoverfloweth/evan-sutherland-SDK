@@ -1,5 +1,6 @@
 export * from './baseApi'
 export * from './booksApi'
+export * from './charactersApi'
 export * from './filterQueryBuilder'
 export * from './lordOfTheSDK'
 export * from './moviesApi'
