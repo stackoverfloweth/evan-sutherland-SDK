@@ -6,3 +6,9 @@ export type PaginatedResponse<T> = {
   pages: number,
   total: number,
 }
+
+export type PaginatedRequest = {
+  limit?: number,
+  page?: number,
+  offset?: number,
+}

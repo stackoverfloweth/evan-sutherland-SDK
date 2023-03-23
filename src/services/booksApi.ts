@@ -1,13 +1,14 @@
 import { BaseApi, BaseApiConfig } from '@/services'
-import { Book, PaginatedResponse } from '@/types'
+import { Book, PaginatedRequest, PaginatedResponse } from '@/types'
+
 
 export class BooksApi extends BaseApi {
   public constructor(apiConfig: BaseApiConfig = {}) {
     super(apiConfig, 'book')
   }
 
-  public getBooks(): Promise<PaginatedResponse<Book[]>> {
-    return this.instance.get('/')
+  public getBooks(pageRequest: PaginatedRequest = {}): Promise<PaginatedResponse<Book[]>> {
+    return this.instance.get('', { params: pageRequest })
   }
 
   public getBook(id: string): Promise<Book | undefined> {
