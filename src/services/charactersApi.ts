@@ -1,5 +1,5 @@
-import { AuthenticatedApiConfig, BaseApi } from '@/services'
-import { CharacterResponse, PaginatedResponse } from '@/types'
+import { BaseApi } from '@/services'
+import { AuthenticatedApiConfig, CharacterResponse, PaginatedResponse } from '@/types'
 import { RequestParams } from '@/types/requestParams'
 
 export class CharactersApi extends BaseApi<AuthenticatedApiConfig> {
@@ -9,6 +9,7 @@ export class CharactersApi extends BaseApi<AuthenticatedApiConfig> {
 
   public getCharacters(requestParams: RequestParams<CharacterResponse> = {}): Promise<PaginatedResponse<CharacterResponse[]>> {
     return this.instance.get('', { params: requestParams })
+      .then(({ data }) => data)
   }
 
   public getCharacter(id: string): Promise<CharacterResponse | undefined> {

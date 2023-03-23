@@ -18,3 +18,5 @@ export function createApi(options: ApiOptions) {
     books: new BooksApi(),
   }
 }
+
+export type CreateApi = ReturnType<typeof createApi>

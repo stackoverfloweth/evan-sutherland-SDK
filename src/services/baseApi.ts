@@ -35,10 +35,12 @@ export class BaseApi<T extends BaseApiConfig | AuthenticatedApiConfig = BaseApiC
     return {}
   }
 
-  protected checkApiFailureResponse(this: InternalAxiosRequestConfig, data: unknown): void {
+  protected checkApiFailureResponse(this: InternalAxiosRequestConfig, data: unknown): unknown {
     if (isFailureResponse(data)) {
       throw new ApiFailureError(data)
     }
+
+    return data
   }
 
   protected applyRequestParams(this: InternalAxiosRequestConfig): void {

@@ -1,6 +1,6 @@
-import { BaseApi, BaseApiConfig } from '@/services'
-import { BookResponse, PaginatedResponse } from '@/types'
-import { RequestParams } from '@/types/requestParams'
+
+import { BaseApi, BaseApiConfig } from '@/services/baseApi'
+import { BookResponse, PaginatedResponse, RequestParams } from '@/types'
 
 export class BooksApi extends BaseApi {
   public constructor(apiConfig: BaseApiConfig = {}) {
@@ -9,6 +9,7 @@ export class BooksApi extends BaseApi {
 
   public getBooks(requestParams: RequestParams<BookResponse> = {}): Promise<PaginatedResponse<BookResponse[]>> {
     return this.instance.get('', { params: requestParams })
+      .then(({ data }) => data)
   }
 
   public getBook(id: string): Promise<BookResponse | undefined> {

@@ -1,5 +1,5 @@
-import { AuthenticatedApiConfig, BaseApi } from '@/services'
-import { MovieResponse, PaginatedResponse } from '@/types'
+import { BaseApi } from '@/services'
+import { AuthenticatedApiConfig, MovieResponse, PaginatedResponse } from '@/types'
 import { RequestParams } from '@/types/requestParams'
 
 export class MoviesApi extends BaseApi<AuthenticatedApiConfig> {
@@ -9,6 +9,7 @@ export class MoviesApi extends BaseApi<AuthenticatedApiConfig> {
 
   public getMovies(requestParams: RequestParams<MovieResponse> = {}): Promise<PaginatedResponse<MovieResponse[]>> {
     return this.instance.get('', { params: requestParams })
+      .then(({ data }) => data)
   }
 
   public getMovie(id: string): Promise<MovieResponse | undefined> {
