@@ -1,20 +1,40 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "esnext",
     "declaration": true,
-    "declarationMap": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "baseUrl": ".",
+    "module": "esnext",
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ],
+    "moduleResolution": "node",
+    "outDir": "./dist/types/",
+    "skipLibCheck": true,
     "strict": true,
     "importHelpers": true,
-    "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "resolveJsonModule": true,
     "paths": {
       "@/*": [
         "./src/*"
-      ]
+      ],
     },
   },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "tests/**/*.ts",
+    "tests/**/*.d.ts",
+    "./*.ts",
+    "./*.d.ts",
+  ]
 }
