@@ -1,0 +1,13 @@
+{
+	"mapper": {
+			"prefix": "mapper",
+			"body": [
+					"import { MapFunction } from '@/services/mapper'",
+					"",
+					"export const map${1}: MapFunction<${2}, ${3}> = function(source) {",
+					"  return ${4}",
+					"}"
+			],
+			"description": "Map function"
+	},
+}
