@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosRequestTransformer, AxiosResponseTransformer, CreateAxiosDefaults, InternalAxiosRequestConfig } from 'axios'
 import { ApiFailureError } from '@/models'
+import { buildFilterQuery } from '@/services'
 import { isFailureResponse } from '@/types'
 import { variables, isDefined, asArray } from '@/utilities'
 
@@ -49,12 +50,15 @@ export class BaseApi<T extends BaseApiConfig | AuthenticatedApiConfig = BaseApiC
       return
     }
 
-    const { pagination, sorting, ...restOfParams } = this.params
+    const { filter, ...restOfParams } = this.params
+
+    const filterQueryString = buildFilterQuery(filter)
+    if (filterQueryString.length) {
+      this.baseURL = `${this.baseURL}?${filterQueryString}`
+    }
 
     this.params = {
       ...restOfParams,
-      ...pagination,
-      ...sorting,
     }
   }
 
