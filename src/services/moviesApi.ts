@@ -1,5 +1,5 @@
 import { AuthenticatedApiConfig, BaseApi } from '@/services'
-import { Movie, PaginatedResponse } from '@/types'
+import { MovieResponse, PaginatedResponse } from '@/types'
 import { RequestParams } from '@/types/requestParams'
 
 export class MoviesApi extends BaseApi<AuthenticatedApiConfig> {
@@ -7,12 +7,12 @@ export class MoviesApi extends BaseApi<AuthenticatedApiConfig> {
     super(apiConfig, 'movie')
   }
 
-  public getMovies(requestParams: RequestParams<Movie> = {}): Promise<PaginatedResponse<Movie[]>> {
+  public getMovies(requestParams: RequestParams<MovieResponse> = {}): Promise<PaginatedResponse<MovieResponse[]>> {
     return this.instance.get('', { params: requestParams })
   }
 
-  public getMovie(id: string): Promise<Movie | undefined> {
-    return this.instance.get<PaginatedResponse<Movie[]>>(`/${id}`)
+  public getMovie(id: string): Promise<MovieResponse | undefined> {
+    return this.instance.get<PaginatedResponse<MovieResponse[]>>(`/${id}`)
       .then(({ data }) => {
         const [value] = data.docs
 
@@ -20,7 +20,7 @@ export class MoviesApi extends BaseApi<AuthenticatedApiConfig> {
       })
   }
 
-  public getMovieQuotes(id: string, requestParams: RequestParams<Movie> = {}): Promise<PaginatedResponse<string[]>> {
+  public getMovieQuotes(id: string, requestParams: RequestParams<MovieResponse> = {}): Promise<PaginatedResponse<string[]>> {
     return this.instance.get(`${id}/quote`, { params: requestParams })
   }
 }

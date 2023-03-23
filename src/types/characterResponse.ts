@@ -1,11 +1,11 @@
-import { Gender } from '@/types/gender'
+import { GenderResponse } from '@/types/genderResponse'
 import { Race } from '@/types/race'
 
-export type Character = {
+export type CharacterResponse = {
   _id: string,
   birth: string,
   death: string,
-  gender: Gender,
+  gender: GenderResponse,
   hair: string,
   height: string,
   name: string,

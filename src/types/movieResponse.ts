@@ -1,4 +1,4 @@
-export type Movie = {
+export type MovieResponse = {
   _id: string,
   academyAwardNominations: number,
   academyAwardWins: number,
