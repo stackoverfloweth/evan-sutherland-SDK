@@ -5,11 +5,20 @@ import { MoviesApi } from '@/services/moviesApi'
 import { QuotesApi } from '@/services/quotesApi'
 import { AuthenticatedApiConfig, isAuthenticatedApiConfig } from '@/types/authenticatedApiConfig'
 
-export type ApiOptions = BaseApiConfig | AuthenticatedApiConfig
+export type CreateBaseApi = {
+  books: BooksApi,
+}
 
-// better types if we let TypeScript infer here
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-export function createApi(options: ApiOptions) {
+export type CreateAuthenticatedApi = CreateBaseApi & {
+  books: BooksApi,
+  characters: CharactersApi,
+  movies: MoviesApi,
+  quotes: QuotesApi,
+}
+
+export function createApi(options: BaseApiConfig): CreateBaseApi
+export function createApi(options: AuthenticatedApiConfig): CreateAuthenticatedApi
+export function createApi(options: BaseApiConfig | AuthenticatedApiConfig = {}): CreateAuthenticatedApi | CreateBaseApi {
   if (isAuthenticatedApiConfig(options)) {
     return {
       books: new BooksApi(),
@@ -23,5 +32,3 @@ export function createApi(options: ApiOptions) {
     books: new BooksApi(),
   }
 }
-
-export type CreateApi = ReturnType<typeof createApi>
