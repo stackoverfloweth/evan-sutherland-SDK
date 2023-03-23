@@ -1,5 +1,7 @@
-import axios, { AxiosInstance, CreateAxiosDefaults } from 'axios'
-import { variables, isDefined } from '@/utilities'
+import axios, { AxiosInstance, AxiosResponseTransformer, CreateAxiosDefaults } from 'axios'
+import { ApiFailureError } from '@/models'
+import { isFailureResponse } from '@/types'
+import { variables, isDefined, asArray } from '@/utilities'
 
 export type BaseApiConfig = CreateAxiosDefaults
 
@@ -21,6 +23,7 @@ export class BaseApi<T extends BaseApiConfig | AuthenticatedApiConfig = BaseApiC
       ...this.apiConfig,
       baseURL: this.composeBaseUrl(),
       headers: this.composeHeaders(),
+      transformResponse: this.composeResponseTransformers(),
     })
   }
 
@@ -32,6 +35,12 @@ export class BaseApi<T extends BaseApiConfig | AuthenticatedApiConfig = BaseApiC
     }
 
     return {}
+  }
+
+  protected checkApiFailureResponse: AxiosResponseTransformer = (data: unknown) => {
+    if (isFailureResponse(data)) {
+      throw new ApiFailureError(data)
+    }
   }
 
   protected composeBaseUrl(): string {
@@ -51,6 +60,14 @@ export class BaseApi<T extends BaseApiConfig | AuthenticatedApiConfig = BaseApiC
       ...this.authorizationHeader,
       ...this.apiConfig.headers,
     }
+  }
+
+  protected composeResponseTransformers(): AxiosResponseTransformer[] {
+    return [
+      ...asArray(axios.defaults.transformResponse ?? []),
+      this.checkApiFailureResponse,
+      ...asArray(this.apiConfig.transformResponse ?? []),
+    ]
   }
 }
 
