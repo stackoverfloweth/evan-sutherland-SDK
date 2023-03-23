@@ -1,7 +1,8 @@
 import axios, { AxiosInstance, AxiosRequestTransformer, AxiosResponseTransformer, CreateAxiosDefaults, InternalAxiosRequestConfig } from 'axios'
-import { ApiFailureError } from '@/models'
-import { buildFilterQuery } from '@/services'
-import { AuthenticatedApiConfig, isAuthenticatedApiConfig, isFailureResponse } from '@/types'
+import { ApiFailureError } from '@/models/apiFailureError'
+import { buildFilterQuery } from '@/services/filterQueryBuilder'
+import { AuthenticatedApiConfig, isAuthenticatedApiConfig } from '@/types/authenticatedApiConfig'
+import { isFailureResponse } from '@/types/failureResponse'
 import { variables, isDefined, asArray } from '@/utilities'
 
 export type BaseApiConfig = CreateAxiosDefaults

@@ -1,6 +1,8 @@
 
 import { BaseApi, BaseApiConfig } from '@/services/baseApi'
-import { BookResponse, PaginatedResponse, RequestParams } from '@/types'
+import { BookResponse } from '@/types/bookResponse'
+import { PaginatedResponse } from '@/types/pagination'
+import { RequestParams } from '@/types/requestParams'
 
 export class BooksApi extends BaseApi {
   public constructor(apiConfig: BaseApiConfig = {}) {

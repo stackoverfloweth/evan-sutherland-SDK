@@ -1,5 +1,8 @@
-import { BaseApiConfig, BooksApi, CharactersApi, MoviesApi } from '@/services'
-import { AuthenticatedApiConfig, isAuthenticatedApiConfig } from '@/types'
+import { BaseApiConfig } from '@/services/baseApi'
+import { BooksApi } from '@/services/booksApi'
+import { CharactersApi } from '@/services/charactersApi'
+import { MoviesApi } from '@/services/moviesApi'
+import { AuthenticatedApiConfig, isAuthenticatedApiConfig } from '@/types/authenticatedApiConfig'
 
 export type ApiOptions = BaseApiConfig | AuthenticatedApiConfig
 

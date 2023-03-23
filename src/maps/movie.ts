@@ -1,6 +1,6 @@
-import { Movie } from '@/models'
+import { Movie } from '@/models/movie'
 import { MapFunction } from '@/services/mapper'
-import { MovieResponse } from '@/types'
+import { MovieResponse } from '@/types/movieResponse'
 
 export const mapMovieResponseToMovie: MapFunction<MovieResponse, Movie> = function(source) {
   return new Movie({

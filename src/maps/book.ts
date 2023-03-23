@@ -1,6 +1,6 @@
-import { Book } from '@/models'
-import { MapFunction } from '@/services'
-import { BookResponse } from '@/types'
+import { Book } from '@/models/book'
+import { MapFunction } from '@/services/mapper'
+import { BookResponse } from '@/types/bookResponse'
 
 export const mapBookResponseToBook: MapFunction<BookResponse, Book> = function(source) {
   return new Book({

@@ -1,4 +1,4 @@
-import { BaseApiConfig } from '@/services'
+import { BaseApiConfig } from '@/services/baseApi'
 
 export type AuthenticatedApiConfig = BaseApiConfig & {
   apiKey: string,

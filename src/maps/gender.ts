@@ -1,5 +1,6 @@
-import { MapFunction } from '@/services'
-import { Gender, GenderResponse, isGender } from '@/types'
+import { MapFunction } from '@/services/mapper'
+import { Gender, isGender } from '@/types/gender'
+import { GenderResponse } from '@/types/genderResponse'
 
 export const mapGenderResponseToGender: MapFunction<GenderResponse, Gender | undefined> = function(source) {
   if (source === undefined) {

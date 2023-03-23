@@ -1,5 +1,6 @@
-import { BaseCollection, Book } from '@/models'
-import { mapper } from '@/services'
+import { BaseCollection } from '@/models/baseCollection'
+import { Book } from '@/models/book'
+import { mapper } from '@/services/mapper'
 
 export class BooksCollection extends BaseCollection<Book> {
   public override async loadMore(): Promise<Book[]> {

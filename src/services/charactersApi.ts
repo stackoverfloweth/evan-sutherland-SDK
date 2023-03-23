@@ -1,5 +1,7 @@
-import { BaseApi } from '@/services'
-import { AuthenticatedApiConfig, CharacterResponse, PaginatedResponse } from '@/types'
+import { BaseApi } from '@/services/baseApi'
+import { AuthenticatedApiConfig } from '@/types/authenticatedApiConfig'
+import { CharacterResponse } from '@/types/characterResponse'
+import { PaginatedResponse } from '@/types/pagination'
 import { RequestParams } from '@/types/requestParams'
 
 export class CharactersApi extends BaseApi<AuthenticatedApiConfig> {

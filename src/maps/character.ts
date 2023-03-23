@@ -1,6 +1,6 @@
-import { Character } from '@/models'
-import { MapFunction } from '@/services'
-import { CharacterResponse } from '@/types'
+import { Character } from '@/models/character'
+import { MapFunction } from '@/services/mapper'
+import { CharacterResponse } from '@/types/characterResponse'
 
 export const mapCharacterResponseToCharacter: MapFunction<CharacterResponse, Character> = function(source) {
   return new Character({
