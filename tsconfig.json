@@ -14,6 +14,7 @@
     ],
     "moduleResolution": "node",
     "outDir": "./dist/types/",
+    "types": ["vite/client"],
     "skipLibCheck": true,
     "strict": true,
     "importHelpers": true,
