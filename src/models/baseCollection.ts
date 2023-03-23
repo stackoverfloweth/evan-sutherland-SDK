@@ -19,4 +19,5 @@ export abstract class BaseCollection<T> {
   }
 
   public abstract loadMore(): Promise<T[]>
+  public abstract loadById(id: string): Promise<T | undefined>
 }

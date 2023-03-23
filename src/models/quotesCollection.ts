@@ -2,6 +2,22 @@ import { BaseCollection, Quote, InvalidApiOptionsError } from '@/models'
 import { mapper } from '@/services'
 
 export class QuotesCollection extends BaseCollection<Quote> {
+  public override async loadById(id: string): Promise<Quote | undefined> {
+    const existing = this.collection.find(quote => quote.id === id)
+
+    if (existing) {
+      return existing
+    }
+
+    if (this.api.movies === undefined) {
+      throw new InvalidApiOptionsError()
+    }
+
+    const response = await this.api.quotes.getQuote(id)
+
+    return mapper.map('QuoteResponse', response, 'Quote')
+  }
+
   public override async loadMore(): Promise<Quote[]> {
     if (!this.hasMorePages) {
       return []
