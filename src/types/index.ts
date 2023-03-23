@@ -1,3 +1,4 @@
+export * from './authenticatedApiConfig'
 export * from './bookResponse'
 export * from './characterResponse'
 export * from './failureResponse'

@@ -1,14 +1,10 @@
 import axios, { AxiosInstance, AxiosRequestTransformer, AxiosResponseTransformer, CreateAxiosDefaults, InternalAxiosRequestConfig } from 'axios'
 import { ApiFailureError } from '@/models'
 import { buildFilterQuery } from '@/services'
-import { isFailureResponse } from '@/types'
+import { AuthenticatedApiConfig, isAuthenticatedApiConfig, isFailureResponse } from '@/types'
 import { variables, isDefined, asArray } from '@/utilities'
 
 export type BaseApiConfig = CreateAxiosDefaults
-
-export type AuthenticatedApiConfig = BaseApiConfig & {
-  apiKey: string,
-}
 
 export class BaseApi<T extends BaseApiConfig | AuthenticatedApiConfig = BaseApiConfig> {
   protected readonly apiConfig: T
@@ -98,6 +94,3 @@ export class BaseApi<T extends BaseApiConfig | AuthenticatedApiConfig = BaseApiC
   }
 }
 
-function isAuthenticatedApiConfig(config: BaseApiConfig | AuthenticatedApiConfig): config is AuthenticatedApiConfig {
-  return 'apiKey' in config
-}
