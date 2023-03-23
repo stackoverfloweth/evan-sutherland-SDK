@@ -1,14 +1,10 @@
-import { BaseCollection, Movie, InvalidApiOptionsError } from '@/models'
-import { mapper } from '@/services'
+import { BaseCollection } from '@/models/baseCollection'
+import { InvalidApiOptionsError } from '@/models/invalidApiOptionsError'
+import { Movie } from '@/models/movie'
+import { mapper } from '@/services/mapper'
 
 export class MoviesCollection extends BaseCollection<Movie> {
   public override async loadById(id: string): Promise<Movie | undefined> {
-    const existing = this.collection.find(movie => movie.id === id)
-
-    if (existing) {
-      return existing
-    }
-
     if (this.api.movies === undefined) {
       throw new InvalidApiOptionsError()
     }
@@ -18,11 +14,11 @@ export class MoviesCollection extends BaseCollection<Movie> {
     return mapper.map('MovieResponse', response, 'Movie')
   }
 
-  public override async loadMore(): Promise<Movie[]> {
-    if (!this.hasMorePages) {
-      return []
-    }
-
+  public override async loadNextPage(): Promise<{
+    data: Movie[],
+    page: number,
+    pages: number,
+  }> {
     if (this.api.movies === undefined) {
       throw new InvalidApiOptionsError()
     }
@@ -33,10 +29,10 @@ export class MoviesCollection extends BaseCollection<Movie> {
 
     const movies = mapper.map('MovieResponse', docs, 'Movie')
 
-    this.collection.push(...movies)
-    this.currentPage = page
-    this.totalPages = pages
-
-    return movies
+    return {
+      data: movies,
+      page,
+      pages,
+    }
   }
 }

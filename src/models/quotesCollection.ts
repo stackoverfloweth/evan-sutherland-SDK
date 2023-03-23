@@ -3,12 +3,6 @@ import { mapper } from '@/services'
 
 export class QuotesCollection extends BaseCollection<Quote> {
   public override async loadById(id: string): Promise<Quote | undefined> {
-    const existing = this.collection.find(quote => quote.id === id)
-
-    if (existing) {
-      return existing
-    }
-
     if (this.api.movies === undefined) {
       throw new InvalidApiOptionsError()
     }
@@ -18,11 +12,11 @@ export class QuotesCollection extends BaseCollection<Quote> {
     return mapper.map('QuoteResponse', response, 'Quote')
   }
 
-  public override async loadMore(): Promise<Quote[]> {
-    if (!this.hasMorePages) {
-      return []
-    }
-
+  public override async loadNextPage(): Promise<{
+    data: Quote[],
+    page: number,
+    pages: number,
+  }> {
     if (this.api.quotes === undefined) {
       throw new InvalidApiOptionsError()
     }
@@ -33,10 +27,10 @@ export class QuotesCollection extends BaseCollection<Quote> {
 
     const quotes = mapper.map('QuoteResponse', docs, 'Quote')
 
-    this.collection.push(...quotes)
-    this.currentPage = page
-    this.totalPages = pages
-
-    return quotes
+    return {
+      data: quotes,
+      page,
+      pages,
+    }
   }
 }
